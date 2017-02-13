@@ -26,10 +26,7 @@ def run_game():
     while True:
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
-        bullets.update()
-        for bullet in bullets.copy():
-            if bullet.rect.bottom <= 0:
-                bullets.remove(bullet)
+        gf.update_bullets(bullets)
         logging.info("total bullets: %d", len(bullets))
         gf.update_screen(ai_settings, screen, ship, bullets)
 
