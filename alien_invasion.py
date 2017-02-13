@@ -30,6 +30,7 @@ def run_game():
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
         gf.update_bullets(bullets)
+        gf.update_aliens(aliens)
         logging.info("total bullets: %d", len(bullets))
         gf.update_screen(ai_settings, screen, ship, aliens, bullets)
 
