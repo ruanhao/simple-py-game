@@ -66,11 +66,15 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
     elif event.key == pygame.K_q:
         sys.exit()
 
-def update_bullets(bullets):
+def update_bullets(aliens, bullets):
     bullets.update()
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
+    ## first True: to remove bullet
+    ## second True: to remove alien
+    pygame.sprite.groupcollide(bullets, aliens, True, True)
+
 
 def fire_bullet(ai_settings, screen, ship, bullets):
     if len(bullets) < ai_settings.bullets_allowed:
