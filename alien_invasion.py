@@ -1,6 +1,12 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import logging
+logging.basicConfig(
+    # level = logging.DEBUG,
+    format = '%(asctime)s %(levelname)-5s - %(message)s'
+)
+
 import pygame
 from pygame.sprite import Group
 
@@ -21,6 +27,10 @@ def run_game():
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
         bullets.update()
+        for bullet in bullets.copy():
+            if bullet.rect.bottom <= 0:
+                bullets.remove(bullet)
+        logging.info("total bullets: %d", len(bullets))
         gf.update_screen(ai_settings, screen, ship, bullets)
 
 run_game()
