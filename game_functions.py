@@ -28,6 +28,7 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
         bullets.empty()
         create_fleet(ai_settings, screen, ship, aliens)
         ship.center_ship()
+        pygame.mouse.set_visible(False)
         stats.game_active = True
 
 def create_fleet(ai_settings, screen, ship, aliens):
@@ -114,6 +115,7 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
         sleep(0.5)
     else:
         stats.game_active = False
+        pygame.mouse.set_visible(True)
 
 def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
     check_fleet_edges(ai_settings, aliens)
