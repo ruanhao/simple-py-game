@@ -3,7 +3,7 @@
 
 import logging
 logging.basicConfig(
-    # level = logging.DEBUG,
+    level = logging.INFO,
     format = '%(asctime)s %(levelname)-5s - %(message)s'
 )
 
@@ -31,14 +31,14 @@ def run_game():
     gf.create_fleet(ai_settings, screen, ship, aliens)
 
     while True:
-        gf.check_events(ai_settings, screen, ship, bullets)
+        gf.check_events(ai_settings, screen, stats, play_button, ship, bullets)
 
         if stats.game_active:
             ship.update()
             gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
             gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
 
-        logging.info("total bullets: %d", len(bullets))
+        logging.debug("total bullets: %d", len(bullets))
         gf.update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button)
 
 run_game()
