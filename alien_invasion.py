@@ -10,10 +10,11 @@ logging.basicConfig(
 import pygame
 from pygame.sprite import Group
 
-from settings import Settings
-from ship import Ship
 import game_functions as gf
+from settings   import Settings
+from ship       import Ship
 from game_stats import GameStats
+from button     import Button
 
 def run_game():
     pygame.init()
@@ -25,6 +26,7 @@ def run_game():
     ship = Ship(ai_settings, screen)
     aliens = Group()
     bullets = Group()
+    play_button = Button(ai_settings, screen, 'Play')
 
     gf.create_fleet(ai_settings, screen, ship, aliens)
 
@@ -37,6 +39,6 @@ def run_game():
             gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
 
         logging.info("total bullets: %d", len(bullets))
-        gf.update_screen(ai_settings, screen, ship, aliens, bullets)
+        gf.update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button)
 
 run_game()
