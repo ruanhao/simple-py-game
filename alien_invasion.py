@@ -15,6 +15,7 @@ from settings   import Settings
 from ship       import Ship
 from game_stats import GameStats
 from button     import Button
+from scoreboard import Scoreboard
 
 def run_game():
     pygame.init()
@@ -27,6 +28,7 @@ def run_game():
     aliens = Group()
     bullets = Group()
     play_button = Button(ai_settings, screen, 'Play')
+    scoreboard = Scoreboard(ai_settings, screen, stats)
 
     gf.create_fleet(ai_settings, screen, ship, aliens)
 
@@ -35,10 +37,10 @@ def run_game():
 
         if stats.game_active:
             ship.update()
-            gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
+            gf.update_bullets(ai_settings, screen, ship, aliens, bullets, scoreboard, stats)
             gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
 
         logging.debug("total bullets: %d", len(bullets))
-        gf.update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button)
+        gf.update_screen(ai_settings, screen, stats, scoreboard, ship, aliens, bullets, play_button)
 
 run_game()
